@@ -6,6 +6,7 @@ public class Product {
     private Double price;
     private Long quantity;
 
+    public Product(){}
     public Product(String pName, Long pId, Double price, Long quantity) {
         this.pName = pName;
         this.pId = pId;

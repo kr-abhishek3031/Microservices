@@ -1,6 +1,9 @@
 package com.example.demo.service;
 
+import com.example.demo.config.NativeJDBC;
 import com.example.demo.entity.Product;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,10 +20,13 @@ public class InventoryServiceImplementation implements InventoryService{
         products = populateInventory();
     }
 
+    @Autowired
+    NativeJDBC nativeJDBC;
+
     @Override
-    public void addProduct(Product p) {
-        p.setpId(productCounter.incrementAndGet());
-        products.add(p);
+    public boolean addProduct(Product p) {
+        boolean temp = nativeJDBC.addProduct(p);
+        return temp;
     }
 
     @Override
@@ -59,12 +65,14 @@ public class InventoryServiceImplementation implements InventoryService{
 
     @Override
     public Product searchProductByID(Long id) {
+        Product p = nativeJDBC.searchProductByID(id);
+        /*
         for(Product p : products){
             if(p.getpId().equals(id)){
                 return p;
             }
-        }
-        return null;
+        }*/
+        return p;
     }
 
     private static List<Product> populateInventory(){

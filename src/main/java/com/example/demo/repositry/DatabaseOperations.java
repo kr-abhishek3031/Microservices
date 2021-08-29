@@ -1,9 +1,8 @@
-package com.example.demo.service;
+package com.example.demo.repositry;
 
 import com.example.demo.entity.Product;
 
-public interface InventoryService {
-
+public interface DatabaseOperations {
     public boolean addProduct(Product p);
     public Product searchProductByName(String name);
     public boolean updateProductPrice( Long id, Double change);
